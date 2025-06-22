@@ -10,40 +10,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          submodules: recursive
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        submodules: recursive
 
-      - name: Install Git
-        run: sudo apt-get update && sudo apt-get install -y git
+    - name: Install Git
+      run: sudo apt-get update && sudo apt-get install -y git
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 17
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: temurin
+        java-version: 17
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
+    - name: Make gradlew executable
+      run: chmod +x gradlew
 
-      - name: Build APK
-        run: ./gradlew assembleDebug
+    - name: Build APK
+      run: ./gradlew assembleDebug
 
-      - name: Upload Debug APK
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: app/build/outputs/apk/debug/app-debug.apk
-          tag: latest
-          allowUpdates: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: Battery Monitor APK
-          replacesArtifacts: true        artifacts: app/build/outputs/apk/debug/app-debug.apk
+    - name: Upload Debug APK
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: app/build/outputs/apk/debug/app-debug.apk
         tag: latest
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
-        name: Battery Monitor APK
-        replacesArtifacts: true        token: ${{ secrets.GITHUB_TOKEN }}
         name: Battery Monitor APK
         replacesArtifacts: true
