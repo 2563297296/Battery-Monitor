@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # ✅ 拉取完整 Git 历史，避免构建失败
 
     - name: Set up JDK
       uses: actions/setup-java@v3
