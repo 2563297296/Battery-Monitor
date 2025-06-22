@@ -1,0 +1,38 @@
+name: Android Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Debug APK
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./gradlew
+
+    - name: Build debug APK
+      run: ./gradlew assembleDebug
+
+    - name: Upload APK to GitHub Releases
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: app/build/outputs/apk/debug/app-debug.apk
+        tag: latest
+        allowUpdates: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: Battery Monitor APK
+        replacesArtifacts: true
+
