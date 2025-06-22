@@ -35,4 +35,3 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: Battery Monitor APK
         replacesArtifacts: true
-
