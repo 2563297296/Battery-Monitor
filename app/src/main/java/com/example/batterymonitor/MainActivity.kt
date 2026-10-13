@@ -144,7 +144,6 @@ class MainActivity : AppCompatActivity() {
         if (refreshInProgress) return
         refreshInProgress = true
         lifecycleScope.launch {
-            binding.progressBar.isVisible = true
             try {
                 val snapshot = runCatching {
                     withContext(Dispatchers.IO) {
@@ -170,7 +169,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 bindSnapshot(snapshot)
             } finally {
-                binding.progressBar.isVisible = false
                 refreshInProgress = false
             }
         }
@@ -208,7 +206,6 @@ class MainActivity : AppCompatActivity() {
     private fun toggleAdbByRoot() {
         binding.adbToggleButton.isEnabled = false
         lifecycleScope.launch {
-            binding.progressBar.isVisible = true
             val result = runCatching {
                 withContext(Dispatchers.IO) {
                     AdbRootController.setEnabled(this@MainActivity, binding.adbRootSwitch.isChecked)
@@ -217,7 +214,6 @@ class MainActivity : AppCompatActivity() {
                 AppLogger.e("MainActivity", "adb_toggle_failed", error)
                 AdbRootController.Result(false, "ADB 操作异常：${error.message ?: "未知错误"}")
             }
-            binding.progressBar.isVisible = false
             binding.adbToggleButton.isEnabled = true
             binding.adbStatusText.text = result.message
             Toast.makeText(this@MainActivity, result.message, Toast.LENGTH_LONG).show()
