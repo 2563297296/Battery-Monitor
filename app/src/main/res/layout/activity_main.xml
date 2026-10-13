@@ -204,11 +204,15 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/designCapacityValue"
                     style="@style/MetricValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="设计容量（出厂标称）: N/A" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/actualMaxCapacityValue"
                     style="@style/MetricValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="实际最大容量（当前满充上限）: N/A" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -236,36 +240,50 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/healthValue"
                     style="@style/MetricValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="健康度（实际最大容量 / 设计容量）: N/A" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/powerValue"
                     style="@style/MetricValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="实时功率（电压 × 电流）: N/A" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/currentValue"
                     style="@style/MetricValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="电流（正值充电，负值放电）: N/A" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/voltageValue"
                     style="@style/MetricValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="电压（电池端电压）: N/A" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/sourceTypeValue"
                     style="@style/MetricValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="供电来源（AC / USB / 电池）: N/A" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/batteryTypeValue"
                     style="@style/MetricValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="电池类型（化学技术）: N/A" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/statusValue"
                     style="@style/MetricValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="电池状态（系统状态）: N/A" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
