@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="电池监测（Root版）"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="选择UI样板后可继续细化样式"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/templateSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@android:drawable/editbox_background"
+            android:inputType="none"
+            android:padding="12dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/templatePreview"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="20dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/templatePreviewText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/debugSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Debug日志开关" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/adbRootSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADB root接管调试开关" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/adbToggleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="应用ADB开关" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/refreshButton"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="刷新电池参数" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="实时参数"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/healthValue"
+                    style="@style/MetricValue"
+                    android:text="健康度: --" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/powerInValue"
+                    style="@style/MetricValue"
+                    android:text="充电功率: --" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/powerOutValue"
+                    style="@style/MetricValue"
+                    android:text="放电功率: --" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/currentValue"
+                    style="@style/MetricValue"
+                    android:text="电流: --" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/voltageValue"
+                    style="@style/MetricValue"
+                    android:text="电压: --" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/sourceTypeValue"
+                    style="@style/MetricValue"
+                    android:text="交流/直流: --" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/batteryTypeValue"
+                    style="@style/MetricValue"
+                    android:text="电池类型: --" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/statusValue"
+                    style="@style/MetricValue"
+                    android:text="状态: --" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
