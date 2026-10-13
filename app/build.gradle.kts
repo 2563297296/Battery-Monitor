@@ -7,6 +7,11 @@ android {
     namespace = "com.example.batterymonitor"
     compileSdk = 34
 
+    val releaseStoreFile = System.getenv("RELEASE_STORE_FILE")
+    val releaseStorePassword = System.getenv("RELEASE_STORE_PASSWORD")
+    val releaseKeyAlias = System.getenv("RELEASE_KEY_ALIAS")
+    val releaseKeyPassword = System.getenv("RELEASE_KEY_PASSWORD")
+
     defaultConfig {
         applicationId = "com.example.batterymonitor"
         minSdk = 26
@@ -24,6 +29,19 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            if (
+                releaseStoreFile != null &&
+                releaseStorePassword != null &&
+                releaseKeyAlias != null &&
+                releaseKeyPassword != null
+            ) {
+                signingConfig = signingConfigs.create("releaseSigning") {
+                    storeFile = file(releaseStoreFile)
+                    storePassword = releaseStorePassword
+                    keyAlias = releaseKeyAlias
+                    keyPassword = releaseKeyPassword
+                }
+            }
         }
     }
 
