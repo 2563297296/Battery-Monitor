@@ -146,8 +146,27 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             binding.progressBar.isVisible = true
             try {
-                val snapshot = withContext(Dispatchers.IO) {
+                val snapshot = runCatching {
+                    withContext(Dispatchers.IO) {
                     BatteryDiagnostics.readSnapshot()
+                    }
+                }.getOrElse { error ->
+                    AppLogger.e("MainActivity", "battery_snapshot_failed", error)
+                    BatterySnapshot(
+                        healthPercent = null,
+                        designCapacity = null,
+                        actualMaxCapacity = null,
+                        capacityUnit = "mAh",
+                        powerW = null,
+                        powerDirection = "unknown",
+                        chargingPowerW = null,
+                        dischargingPowerW = null,
+                        currentMa = null,
+                        voltageV = null,
+                        sourceType = "N/A",
+                        batteryType = "N/A",
+                        rawStatus = "N/A"
+                    )
                 }
                 bindSnapshot(snapshot)
             } finally {
@@ -190,8 +209,13 @@ class MainActivity : AppCompatActivity() {
         binding.adbToggleButton.isEnabled = false
         lifecycleScope.launch {
             binding.progressBar.isVisible = true
-            val result = withContext(Dispatchers.IO) {
-                AdbRootController.setEnabled(this@MainActivity, binding.adbRootSwitch.isChecked)
+            val result = runCatching {
+                withContext(Dispatchers.IO) {
+                    AdbRootController.setEnabled(this@MainActivity, binding.adbRootSwitch.isChecked)
+                }
+            }.getOrElse { error ->
+                AppLogger.e("MainActivity", "adb_toggle_failed", error)
+                AdbRootController.Result(false, "ADB 操作异常：${error.message ?: "未知错误"}")
             }
             binding.progressBar.isVisible = false
             binding.adbToggleButton.isEnabled = true
