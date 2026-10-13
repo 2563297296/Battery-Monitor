@@ -11,6 +11,17 @@ object BatteryDiagnostics {
         val energyFull = readDouble("$BASE/battery/energy_full")
         val energyDesign = readDouble("$BASE/battery/energy_full_design")
 
+        val designCapacity = when {
+            chargeDesign != null -> chargeDesign / 1000.0
+            energyDesign != null -> energyDesign / 1000.0
+            else -> null
+        }
+        val actualMaxCapacity = when {
+            chargeFull != null -> chargeFull / 1000.0
+            energyFull != null -> energyFull / 1000.0
+            else -> null
+        }
+        val capacityUnit = if (chargeDesign != null || chargeFull != null) "mAh" else "mWh"
         val healthPercent = when {
             chargeFull != null && chargeDesign != null && chargeDesign > 0 -> (chargeFull / chargeDesign) * 100
             energyFull != null && energyDesign != null && energyDesign > 0 -> (energyFull / energyDesign) * 100
@@ -33,9 +44,23 @@ object BatteryDiagnostics {
 
         val chargingPower = if (currentUa != null && currentUa > 0) powerW else null
         val dischargingPower = if (currentUa != null && currentUa < 0) powerW else null
+        val powerDirection = when {
+            currentUa == null -> "unknown"
+            currentUa > 0 -> "charging"
+            currentUa < 0 -> "discharging"
+            else -> when (status.lowercase()) {
+                "charging", "full" -> "charging"
+                else -> "idle"
+            }
+        }
 
         return BatterySnapshot(
             healthPercent = healthPercent,
+            designCapacity = designCapacity,
+            actualMaxCapacity = actualMaxCapacity,
+            capacityUnit = capacityUnit,
+            powerW = powerW,
+            powerDirection = powerDirection,
             chargingPowerW = chargingPower,
             dischargingPowerW = dischargingPower,
             currentMa = currentMa,
